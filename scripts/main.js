@@ -15,14 +15,16 @@ var h = require('./helpers');
 var App = React.createClass({
     getInitialState: function () {
         return {
-            tasks: {}
+            tasks: {},
+            meta: {
+                docnr: '#01-001',
+                date: h.getToday()
+            }
         }
     },
     addTask: function (task) {
         var timestamp = (new Date()).getTime();
-        // update the state object
         this.state.tasks['task-' + timestamp] = task;
-        // set the state
         this.setState({tasks: this.state.tasks});
     },
     removeTask: function (task) {
@@ -37,6 +39,9 @@ var App = React.createClass({
     renderTask: function (key) {
         return <Task key={key} index={key} details={this.state.tasks[key]}
                      removeTask={this.removeTask.bind(this, key)}/>
+    },
+    updateMeta: function (meta) {
+        this.setState({meta: meta});
     },
     renderTotal:function () {
         var taskIds = Object.keys(this.state.tasks);
@@ -56,11 +61,15 @@ var App = React.createClass({
     render: function () {
         return (
             <div>
-                <Inventory addTask={this.addTask} />
+                <Sidebar addTask={this.addTask} updateMeta={this.updateMeta} />
                 <div className="preview">
                     <div className="document">
                         <Header/>
                         <div className="invoice__meta">
+                            <div className="invoice__meta__data">
+                                <span className="invoice__docnr">{this.state.meta.docnr}</span>
+                                <span className="invoice__date">{h.formatDate(this.state.meta.date)}</span>
+                            </div>
                             <div className="invoice__total invoice__total--large">
                                 <span className="invoice__total__label">Total</span>
                                 {h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}
@@ -114,7 +123,7 @@ var Header = React.createClass({
         var company = require('./company-info');
         return (
             <header className="invoice__header">
-                <img className="invoice__logo" src="http://placehold.it/120x32" alt="{company.name}"/>
+                <img className="invoice__logo" src="http://placehold.it/120x32" alt={company.name}/>
 
                 <div className="invoice__sender">
                     <h2 className="invoice__name">{company.name}</h2>
@@ -158,9 +167,7 @@ var Task = React.createClass({
 
 var AddTaskForm = React.createClass({
     createTask: function (event) {
-        // 1. Stop the form from submitting
         event.preventDefault();
-        // 2. Take the data from the form and create an object
         var task = {
             name: this.refs.name.value,
             desc: this.refs.desc.value,
@@ -170,17 +177,16 @@ var AddTaskForm = React.createClass({
             vat: (parseInt(this.refs.hours.value) * parseFloat(this.refs.price.value.replace(/,/g, '.')) * 0.21)
         }
 
-        // 3. Add the task to the App State
         this.props.addTask(task);
         this.refs.taskForm.reset();
     },
     render: function () {
         return (
             <form className="task-form" ref="taskForm" onSubmit={this.createTask}>
-                <input type="text" ref="name" placeholder="Name"/>
+                <input type="text" ref="name" placeholder="Name" />
                 <textarea type="text" ref="desc" placeholder="Desc"></textarea>
-                <input type="text" ref="price" placeholder="Price"/>
-                <input type="text" ref="hours" placeholder="Hours"/>
+                <input type="text" ref="price" placeholder="Price" />
+                <input type="text" ref="hours" placeholder="Hours" />
                 <button type="submit">+ Add Task</button>
             </form>
         )
@@ -188,17 +194,44 @@ var AddTaskForm = React.createClass({
 });
 
 /*
- Inventory
- <Inventory/>
+ Meta Form
+ <MetaForm />
  */
 
-var Inventory = React.createClass({
+var MetaForm = React.createClass({
+    updateMeta: function (event) {
+        event.preventDefault();
+        var meta = {
+            docnr: this.refs.docnr.value,
+            date: this.refs.date.value,
+        }
+
+        this.props.updateMeta(meta);
+    },
+    render: function () {
+        return (
+            <form className="meta-form" ref="metaForm" onSubmit={this.updateMeta}>
+                <input type="text" ref="docnr" placeholder="Document #" />
+                <input type="date" ref="date" placeholder="Date" />
+                <button type="submit">Update</button>
+            </form>
+        )
+    }
+});
+
+/*
+ Sidebar
+ <Sidebar/>
+ */
+
+var Sidebar = React.createClass({
     render: function () {
         return (
             <div className="sidebar">
                 <h2>Task</h2>
-
                 <AddTaskForm {...this.props} />
+                <h2>Meta</h2>
+                <MetaForm {...this.props} />
                 <button>Load Company Info</button>
                 <button className="print" onClick={window.print}>Print</button>
             </div>
