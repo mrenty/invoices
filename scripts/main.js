@@ -104,7 +104,7 @@ var App = React.createClass({
                                     {h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}
                                 </div>
                             </div>
-                            <p className="invoice__disclaimer">Please transfer the amount within 30 days IBAN 1234 5678 9010.</p>
+                            <p className="invoice__disclaimer">Please transfer the amount within 30 days <span>IBAN 1234 5678 9010</span>.</p>
                         </footer>
                     </div>
                 </div>
