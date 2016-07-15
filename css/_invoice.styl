@@ -1,0 +1,193 @@
+.document
+  background: white
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+  color: dark-blue
+  margin: 0 auto
+  padding-bottom: 175px
+  position: relative
+  width: 960px
+
+.invoice__header
+  background-color: gray
+  color: dark-blue
+  padding: 60px 60px 0
+
+.invoice__logo
+  margin-bottom: 50px
+
+.invoice__name
+  font-size: 16px
+  font-weight: normal
+  margin: 0
+  text-align: left
+
+.invoice__header p
+  font-size: 14px
+  margin: 0
+
+.invoice__total
+  background-color: dark-blue
+  color: white
+  display: block
+  font-size: 18px
+  height: 56px
+  line-height: 56px
+  padding: 10px 10px 10px 25px
+  position: absolute
+  right: 0
+  text-align: right
+  top: 0
+
+.invoice__total--large
+  display: inline-block
+  float: right
+  font-size: 26px
+  height: auto
+  margin-right: 60px
+  padding: 50px 10px 10px
+  position: relative
+  right: auto
+  top: auto
+
+.invoice__total__label
+  display: block
+  font-size: 12px
+  line-height: 12px
+  position: absolute
+  right: 10px
+  text-transform: uppercase
+  top: 10px
+
+.invoice__total--large .invoice__total__label
+  font-size: 12px
+  left: 10px
+  position: absolute
+  right: auto
+  text-transform: uppercase
+  top: 10px
+
+.invoice__table
+  margin-bottom: 60px
+  width: 100%
+
+.invoice__table thead
+  background-color: gray
+  font-size: 12px
+  text-transform: uppercase
+
+.invoice__table thead th
+  padding: 14px 0
+  text-align: right
+  width: 10%
+
+.invoice__table thead th:first-child
+  padding-left: 60px
+  text-align: left
+  width: 55%
+
+.invoice__table thead th:last-child
+  padding-right: 60px
+  width: 25%
+
+.invoice__table tbody
+  font-size: 14px
+  text-align: right
+
+.invoice__table tbody tr
+  border-bottom: 1px solid gray
+
+.invoice__table tbody td
+  padding: 26px 0
+  position: relative
+
+.invoice__table tbody td:first-child
+  padding-left: 60px
+  text-align: left
+
+.invoice__table tbody td:last-child
+  padding-right: 60px
+
+.invoice__task
+  display: block
+  font-size: 18px
+
+.invoice__remove
+  background: none
+  background-image: url('images/cancel.svg')
+  background-position: center
+  background-repeat: no-repeat
+  background-size: 24px
+  border: 0
+  display: block
+  height: 42px
+  left: 9px
+  margin: 0
+  position: absolute
+  width: 42px
+  text-indent: -9999px
+  top: 50%
+  transform: translateY(-50%)
+
+.invoice__remove:hover
+  background: none
+  background-image: url('images/cancel.svg')
+  background-position: center
+  background-repeat: no-repeat
+  background-size: 24px
+
+.invoice__footer
+  bottom: 0
+  height: 175px;
+  padding: 0 60px
+  position: absolute
+  width: 100%
+  
+.invoice__calculation
+  background-color: gray
+  overflow: hidden
+  padding: 10px
+  position: relative
+
+.invoice__calculation__item
+  display: block
+  float: left
+  font-size: 14px
+
+.invoice__calculation__label
+  display: block
+  font-size 12px
+
+.invoice__calculation__addition
+  background-image: url('images/add.svg')
+  background-position: center
+  background-repeat: no-repeat
+  background-size: 20px
+  display: block
+  float: left
+  height: 36px
+  width: 50px
+
+.invoice__disclaimer
+  border-bottom: 2px solid gray
+  font-size: 12px
+  margin: 0
+  padding: 14px 0
+
+@media print
+  .document
+    width: 100vw
+
+  .invoice__table
+    width: 100vw
+
+  .invoice__table thead th
+    width: 10vw
+
+  .invoice__table thead th:first-child
+    width: 55vw
+
+  .invoice__table thead th:last-child
+    width: 25vw
+
+  .invoice__remove
+    display: none

@@ -1,0 +1,34 @@
+@require './normalize.styl'
+@require './_*.styl'
+
+.sidebar
+  background: #2f3238
+  color: #b5b5b5
+  display: block
+  float: left
+  height: 100vh
+  overflow-y scroll
+  padding: 20px
+  width: 30%
+
+.task-form
+  margin: 0 auto;
+
+.preview
+  display: block
+  float: left
+  height: 100vh
+  overflow-y scroll
+  padding: 20px
+  width: 70%
+
+@media print
+  .sidebar
+    display: none
+
+  .preview
+    padding: 0
+    width: 100%
+
+  .document
+    min-height: 100%
