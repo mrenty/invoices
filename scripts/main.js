@@ -60,9 +60,11 @@ var App = React.createClass({
                 <div className="preview">
                     <div className="document">
                         <Header/>
-                        <div className="invoice__total invoice__total--large">
-                            <span className="invoice__total__label">Total</span>
-                            {h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}
+                        <div className="invoice__meta">
+                            <div className="invoice__total invoice__total--large">
+                                <span className="invoice__total__label">Total</span>
+                                {h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}
+                            </div>
                         </div>
                         <table className="invoice__table">
                             <thead>
