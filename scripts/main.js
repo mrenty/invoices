@@ -1,12 +1,10 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route } from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var createBrowserHistory = require('history/lib/createBrowserHistory');
-
-var h = require('./helpers');
+import h from './helpers';
 
 /*
  App
@@ -229,11 +227,22 @@ var Sidebar = React.createClass({
     render: function () {
         return (
             <div className="sidebar">
-                <h2>Task</h2>
-                <AddTaskForm {...this.props} />
-                <h2>Meta</h2>
-                <MetaForm {...this.props} />
-                <button>Load Company Info</button>
+                <Tabs selectedIndex={0} >
+                    <TabList>
+                        <Tab className="tab">Tasks</Tab>
+                        <Tab>Meta</Tab>
+                    </TabList>
+
+                    <TabPanel>
+                        <h2>Task</h2>
+                        <AddTaskForm {...this.props} />
+                    </TabPanel>
+                    <TabPanel>
+                        <h2>Meta</h2>
+                        <MetaForm {...this.props} />
+                        <button>Load Company Info</button>
+                    </TabPanel>
+                </Tabs>
                 <button className="print" onClick={window.print}>Print</button>
             </div>
         )
