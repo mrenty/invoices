@@ -173,7 +173,7 @@ var AddTaskForm = React.createClass({
             desc: this.refs.desc.value,
             price: parseFloat(this.refs.price.value.replace(/,/g, '.')),
             hours: this.refs.hours.value,
-            totalExcl: (parseFloat(this.refs.hours.value) * parseFloat(this.refs.price.value.replace(/,/g, '.'))),
+            totalExcl: ((parseFloat(this.refs.hours.value) || 1) * parseFloat(this.refs.price.value.replace(/,/g, '.'))),
             vat: (parseInt(this.refs.hours.value) * parseFloat(this.refs.price.value.replace(/,/g, '.')) * 0.21)
         }
 
