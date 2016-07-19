@@ -18,8 +18,13 @@
 .react-tabs [role=tab]:hover,
 .react-tabs [role=tab]:focus
   background: lighten(dark-blue, 5)
+  box-shadow: 0
   color: white
   outline: none
+
+.react-tabs [role=tab]:hover::after,
+.react-tabs [role=tab]:focus::after
+  display: none
 
 .react-tabs [role=tab][aria-selected=true]
   background: dark-blue
