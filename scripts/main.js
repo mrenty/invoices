@@ -179,6 +179,7 @@ var AddTaskForm = React.createClass({
 
         this.props.addTask(task);
         this.refs.taskForm.reset();
+        this.refs.taskForm.elements[0].focus();
     },
     render: function () {
         return (
