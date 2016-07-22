@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 import { Router, Route } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -83,9 +84,9 @@ var App = React.createClass({
                                     <th>Line total</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <CSSTransitionGroup component="tbody" transitionName="task" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
                                 {Object.keys(this.state.tasks).map(this.renderTask)}
-                            </tbody>
+                            </CSSTransitionGroup>
                         </table>
                         <footer className="invoice__footer">
                             <div className="invoice__calculation">
