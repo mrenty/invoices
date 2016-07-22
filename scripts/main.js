@@ -21,12 +21,12 @@ var App = React.createClass({
         }
     },
     addTask: function (task) {
-        var timestamp = (new Date()).getTime();
+        let timestamp = (new Date()).getTime();
         this.state.tasks['task-' + timestamp] = task;
         this.setState({tasks: this.state.tasks});
     },
     removeTask: function (task) {
-        var tasks = Object.keys(this.state.tasks)
+        let tasks = Object.keys(this.state.tasks)
             .filter(key => key !== task)
             .reduce((result, current) => {
                 result[current] = this.state.tasks[current];
@@ -42,11 +42,11 @@ var App = React.createClass({
         this.setState({meta: meta});
     },
     renderTotal:function () {
-        var taskIds = Object.keys(this.state.tasks);
+        let taskIds = Object.keys(this.state.tasks);
 
         var total = taskIds.reduce((prevTotal, key)=> {
 
-            var task = this.state.tasks[key];
+            let task = this.state.tasks[key];
 
             if (task) {
                 return prevTotal + parseFloat(task.totalExcl) || 0;
@@ -57,20 +57,21 @@ var App = React.createClass({
         return total;
     },
     render: function () {
+        let companyInfo = require('./company-info');
         return (
             <div>
                 <Sidebar addTask={this.addTask} updateMeta={this.updateMeta} />
                 <div className="preview">
                     <div className="document">
-                        <Header/>
+                        <Header company={companyInfo} />
                         <div className="invoice__meta">
                             <div className="invoice__meta__data">
                                 <span className="invoice__docnr">{this.state.meta.docnr}</span>
-                                <span className="invoice__date">{h.formatDate(this.state.meta.date)}</span>
+                                <time dateTime={this.state.meta.date} className="invoice__date">{h.formatDate(this.state.meta.date)}</time>
                             </div>
                             <div className="invoice__total invoice__total--large">
                                 <span className="invoice__total__label">Total</span>
-                                {h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}
+                                <strong>{h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}</strong>
                             </div>
                         </div>
                         <table className="invoice__table">
@@ -90,19 +91,19 @@ var App = React.createClass({
                             <div className="invoice__calculation">
                                 <div className="invoice__calculation__item">
                                     <span className="invoice__calculation__label">Subtotal</span>
-                                    {h.formatPrice(this.renderTotal())}
+                                    <b>{h.formatPrice(this.renderTotal())}</b>
                                 </div>
                                 <div className="invoice__calculation__addition"></div>
                                 <div className="invoice__calculation__item">
                                     <span className="invoice__calculation__label">VAT</span>
-                                    {h.formatPrice(this.renderTotal() * 0.21)}
+                                    <b>{h.formatPrice(this.renderTotal() * 0.21)}</b>
                                 </div>
                                 <div className="invoice__total">
                                     <span className="invoice__total__label">Total</span>
-                                    {h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}
+                                    <strong>{h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}</strong>
                                 </div>
                             </div>
-                            <p className="invoice__disclaimer">Please transfer the amount within 30 days <span>IBAN 1234 5678 9010</span>.</p>
+                            <p className="invoice__disclaimer">Please transfer the amount within 30 days <span>IBAN {companyInfo.basic.bankAccountNumber}</span>.</p>
                         </footer>
                     </div>
                 </div>
@@ -118,16 +119,19 @@ var App = React.createClass({
 
 var Header = React.createClass({
     render: function () {
-        var company = require('./company-info');
+        const company = this.props.company;
         return (
             <header className="invoice__header">
-                <img className="invoice__logo" src="http://placehold.it/120x32" alt={company.name}/>
+                <img className="invoice__logo" src={company.basic.logo} alt={company.basic.name}/>
 
                 <div className="invoice__sender">
-                    <h2 className="invoice__name">{company.name}</h2>
-                    <p>{company.address}</p>
-                    <p>{company.zipcode} {company.city}</p>
-                    <p>{company.vatin}</p>
+                    <h2 className="invoice__name">{company.basic.name}</h2>
+                    <p>{company.basic.address}</p>
+                    <p>{company.basic.zipcode} {company.basic.city}</p>
+
+                    {Object.keys(company.extra).map(key => {
+                        return <p key={key} className="invoice__extra">{company.extra[key]}</p>
+                    })}
                 </div>
             </header>
         )
@@ -141,7 +145,7 @@ var Header = React.createClass({
 
 var Task = React.createClass({
     render: function () {
-        var details = this.props.details;
+        let details = this.props.details;
         return (
             <tr>
                 <td>
@@ -166,7 +170,7 @@ var Task = React.createClass({
 var AddTaskForm = React.createClass({
     createTask: function (event) {
         event.preventDefault();
-        var task = {
+        let task = {
             name: this.refs.name.value,
             desc: this.refs.desc.value,
             price: parseFloat(this.refs.price.value.replace(/,/g, '.')),
@@ -200,7 +204,7 @@ var AddTaskForm = React.createClass({
 var MetaForm = React.createClass({
     updateMeta: function (event) {
         event.preventDefault();
-        var meta = {
+        let meta = {
             docnr: this.refs.docnr.value,
             date: this.refs.date.value,
         }
@@ -243,7 +247,9 @@ var Sidebar = React.createClass({
                         <button>Load Company Info</button>
                     </TabPanel>
                 </Tabs>
-                <button className="print" onClick={window.print}>Print</button>
+                <div className="sidebar__actions">
+                    <button className="print" onClick={window.print}>Print</button>
+                </div>
             </div>
         )
     }
