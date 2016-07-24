@@ -25,7 +25,6 @@ var Sidebar = React.createClass({
                     <TabPanel>
                         <h2>Meta</h2>
                         <MetaForm {...this.props} />
-                        <button>Load Company Info</button>
                     </TabPanel>
                 </Tabs>
                 <div className="sidebar__actions">
