@@ -12,7 +12,7 @@ var Sidebar = React.createClass({
     render: function () {
         return (
             <div className="sidebar">
-                <Tabs selectedIndex={0} >
+                <Tabs>
                     <TabList>
                         <Tab className="tab">Tasks</Tab>
                         <Tab>Meta</Tab>
