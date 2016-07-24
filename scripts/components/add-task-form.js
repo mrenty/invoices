@@ -11,10 +11,10 @@ var AddTaskForm = React.createClass({
         let task = {
             name: this.refs.name.value,
             desc: this.refs.desc.value,
-            price: parseFloat(this.refs.price.value.replace(/,/g, '.')),
+            rate: parseFloat(this.refs.rate.value.replace(/,/g, '.')),
             hours: this.refs.hours.value,
-            totalExcl: ((parseFloat(this.refs.hours.value) || 1) * parseFloat(this.refs.price.value.replace(/,/g, '.'))),
-            vat: (parseInt(this.refs.hours.value) * parseFloat(this.refs.price.value.replace(/,/g, '.')) * 0.21)
+            totalExcl: ((parseFloat(this.refs.hours.value) || 1) * parseFloat(this.refs.rate.value.replace(/,/g, '.'))),
+            vat: (parseInt(this.refs.hours.value) * parseFloat(this.refs.rate.value.replace(/,/g, '.')) * 0.21)
         }
 
         this.props.addTask(task);
@@ -26,7 +26,7 @@ var AddTaskForm = React.createClass({
             <form className="task-form" ref="taskForm" onSubmit={this.createTask}>
                 <input type="text" ref="name" placeholder="Name" />
                 <textarea type="text" ref="desc" placeholder="Desc"></textarea>
-                <input type="text" ref="price" placeholder="Price" />
+                <input type="text" ref="rate" placeholder="Rate" />
                 <input type="text" ref="hours" placeholder="Hours" />
                 <button type="submit">+ Add Task</button>
             </form>

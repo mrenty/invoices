@@ -16,7 +16,7 @@ var Task = React.createClass({
                     <span className="invoice__task">{details.name}</span>
                     {details.desc}
                 </td>
-                <td>{h.formatPrice(details.price)}</td>
+                <td>{h.formatPrice(details.rate)}</td>
                 <td>{details.hours}</td>
                 <td>{h.formatPrice(details.totalExcl)}</td>
             </tr>
