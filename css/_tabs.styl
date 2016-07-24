@@ -6,9 +6,9 @@
   margin-bottom: 40px
 
 .react-tabs [role=tab]
-  background: dark-blue
+  background: transparent
   border: 0
-  border-bottom: 2px solid transparent
+  border-bottom: 2px solid pink
   border-radius: 0
   flex: 1 1 auto
   padding: 10px 0
@@ -17,8 +17,7 @@
 
 .react-tabs [role=tab]:hover,
 .react-tabs [role=tab]:focus
-  background: lighten(dark-blue, 5)
-  box-shadow: 0
+  box-shadow: none
   color: white
   outline: none
 
@@ -27,7 +26,7 @@
   display: none
 
 .react-tabs [role=tab][aria-selected=true]
-  background: dark-blue
+  background: pink
   border: 0
   border-bottom: 2px solid pink
   border-radius: 0

@@ -1,7 +1,7 @@
 input, textarea
-  background: #0000
-  border: 2px solid
-  color: gray
+  background: transparent
+  border: 1px solid #7c8f9e
+  color: #7c8f9e
   display: block
   margin-bottom: 10px
   max-width: 100%
@@ -10,24 +10,25 @@ input, textarea
   width: 100%
 
 input:focus, textarea:focus {
-  background: gray
-  border-color: gray
-  color: dark-blue
+  border-color: white
+  box-shadow: 0 0 10px 1px rgba(255,255,255,0.3)
+  color: white
   outline: none
 }
 
 button
-  background gray
+  background #7c8f9e
   border 0
-  color: dark-blue;
+  color: white
   display: block
   margin-bottom: 10px
-  padding: 0.8em 0.5em;
-  transition: all 0.2s;
-  width: 100%;
+  padding: 0.8em 0.5em
+  transition: all 0.2s
+  width: 100%
 
 button:hover, button:focus
-  background: gray
+  background: white
+  color: #7c8f9e
   outline: none
 
 .print
@@ -39,3 +40,4 @@ button:hover, button:focus
 
 .print:hover, .print:focus
   background-color: dark-pink
+  color: white
