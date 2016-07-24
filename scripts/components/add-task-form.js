@@ -9,12 +9,12 @@ var AddTaskForm = React.createClass({
     createTask: function (event) {
         event.preventDefault();
         let task = {
-            name: this.refs.name.value,
-            desc: this.refs.desc.value,
-            rate: parseFloat(this.refs.rate.value.replace(/,/g, '.')),
+            name: this.refs.name.value || '',
+            desc: this.refs.desc.value || '',
+            rate: parseFloat(this.refs.rate.value.replace(/,/g, '.')) || 0,
             hours: this.refs.hours.value,
-            totalExcl: ((parseFloat(this.refs.hours.value) || 1) * parseFloat(this.refs.rate.value.replace(/,/g, '.'))),
-            vat: (parseInt(this.refs.hours.value) * parseFloat(this.refs.rate.value.replace(/,/g, '.')) * 0.21)
+            totalExcl: ((parseFloat(this.refs.hours.value) || 1) * (parseFloat(this.refs.rate.value.replace(/,/g, '.')) || 0)),
+            vat: (parseInt(this.refs.hours.value) * parseFloat(this.refs.rate.value.replace(/,/g, '.') || 0) * 0.21)
         }
 
         this.props.addTask(task);
