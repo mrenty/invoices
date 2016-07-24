@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import h from './../helpers';
 
 var MetaForm = React.createClass({
     updateMeta: function (event) {

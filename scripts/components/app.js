@@ -25,14 +25,11 @@ var App = React.createClass({
         this.state.tasks['task-' + timestamp] = task;
         this.setState({tasks: this.state.tasks});
     },
-    removeTask: function (task) {
-        let tasks = Object.keys(this.state.tasks)
-            .filter(key => key !== task)
-            .reduce((result, current) => {
-                result[current] = this.state.tasks[current];
-                return result;
-            }, {});
-        this.setState({tasks: tasks});
+    removeTask: function (key) {
+        delete this.state.tasks[key];
+        this.setState({
+            tasks : this.state.tasks
+        });
     },
     renderTask: function (key) {
         return <Task key={key} index={key} details={this.state.tasks[key]}
