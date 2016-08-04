@@ -17,6 +17,12 @@ var App = React.createClass({
             meta: {
                 docnr: '#01-001',
                 date: h.getToday()
+            },
+            client: {
+                name: 'Jane Doe',
+                address: '123 Main St',
+                zipCode: '1234',
+                city: 'Anytown'
             }
         }
     },
@@ -38,6 +44,9 @@ var App = React.createClass({
     updateMeta: function (meta) {
         this.setState({meta: meta});
     },
+    updateClient: function (client) {
+        this.setState({client: client});
+    },
     renderTotal:function () {
         let taskIds = Object.keys(this.state.tasks);
 
@@ -57,10 +66,10 @@ var App = React.createClass({
         let companyInfo = require('./../company-info');
         return (
             <div>
-                <Sidebar addTask={this.addTask} updateMeta={this.updateMeta} meta={this.state.meta} />
+                <Sidebar addTask={this.addTask} updateMeta={this.updateMeta} meta={this.state.meta} updateClient={this.updateClient} />
                 <div className="preview">
                     <div className="document">
-                        <Header company={companyInfo} />
+                        <Header company={companyInfo} client={this.state.client} />
                         <div className="invoice__meta">
                             <div className="invoice__meta__data">
                                 <span className="invoice__docnr">{this.state.meta.docnr}</span>

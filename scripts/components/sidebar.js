@@ -7,6 +7,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import AddTaskForm from './add-task-form';
 import MetaForm from './meta-form';
+import ClientForm from './client-form';
 
 var Sidebar = React.createClass({
     render: function () {
@@ -16,6 +17,7 @@ var Sidebar = React.createClass({
                     <TabList>
                         <Tab className="tab">Tasks</Tab>
                         <Tab>Meta</Tab>
+                        <Tab>Client</Tab>
                     </TabList>
 
                     <TabPanel>
@@ -25,6 +27,10 @@ var Sidebar = React.createClass({
                     <TabPanel>
                         <h2>Meta</h2>
                         <MetaForm {...this.props} />
+                    </TabPanel>
+                    <TabPanel>
+                        <h2>Client</h2>
+                        <ClientForm {...this.props} />
                     </TabPanel>
                 </Tabs>
                 <div className="sidebar__actions">
