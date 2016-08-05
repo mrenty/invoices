@@ -45,6 +45,7 @@ var ClientForm = React.createClass({
         }
     },
     render: function () {
+        const isLocalStorageSupported = !h.localStorageSupport;
         return (
             <form className="client-form" ref="clientForm" onSubmit={this.updateClient}>
                 <input type="text" ref="name" placeholder="Name" />
@@ -52,8 +53,8 @@ var ClientForm = React.createClass({
                 <input type="text" ref="zipCode" placeholder="Zip-code" />
                 <input type="text" ref="city" placeholder="City" />
                 <button type="submit">Update</button>
-                <button type="button" disabled={!h.localStorageSupport} onClick={this.saveClient}>Save</button>
-                <button type="button" disabled={!h.localStorageSupport} onClick={this.loadClient}>Get latest</button>
+                <button type="button" disabled={isLocalStorageSupported} onClick={this.saveClient}>Save</button>
+                <button type="button" disabled={isLocalStorageSupported} onClick={this.loadClient}>Load</button>
             </form>
         )
     }
