@@ -7,13 +7,12 @@ import React from 'react';
 
 var ClientForm = React.createClass({
     getClient: function () {
-        let client = {
+        return {
             name: this.refs.name.value,
             address: this.refs.address.value,
             zipCode: this.refs.zipCode.value,
             city: this.refs.city.value,
         }
-        return client;
     },
     updateClient: function (event) {
         event.preventDefault();

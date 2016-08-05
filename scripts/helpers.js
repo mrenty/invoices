@@ -1,7 +1,6 @@
 let helpers = {
     formatPrice: function (rate) {
         return rate.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2});
-        // return '€ ' + ( parseFloat(rate).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ".") );
     },
     formatDate: function (date) {
         var formattedDate = new Date(date).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -21,9 +20,8 @@ let helpers = {
         if(mm<10){
             mm='0'+mm
         }
-        var today = yyyy+'-'+mm+'-'+dd;
-        return today;
+        return yyyy+'-'+mm+'-'+dd;
     }
-}
+};
 
 export default helpers;

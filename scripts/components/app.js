@@ -50,7 +50,7 @@ var App = React.createClass({
     renderTotal:function () {
         let taskIds = Object.keys(this.state.tasks);
 
-        var total = taskIds.reduce((prevTotal, key)=> {
+        return taskIds.reduce((prevTotal, key)=> {
 
             let task = this.state.tasks[key];
 
@@ -60,7 +60,6 @@ var App = React.createClass({
 
             return prevTotal;
         }, 0);
-        return total;
     },
     render: function () {
         let companyInfo = require('./../company-info');

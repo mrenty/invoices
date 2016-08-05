@@ -15,7 +15,7 @@ var AddTaskForm = React.createClass({
             hours: this.refs.hours.value,
             totalExcl: ((parseFloat(this.refs.hours.value) || 1) * (parseFloat(this.refs.rate.value.replace(/,/g, '.')) || 0)),
             vat: (parseInt(this.refs.hours.value) * parseFloat(this.refs.rate.value.replace(/,/g, '.') || 0) * 0.21)
-        }
+        };
 
         this.props.addTask(task);
         this.refs.taskForm.reset();

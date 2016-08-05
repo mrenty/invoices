@@ -11,7 +11,7 @@ var MetaForm = React.createClass({
         let meta = {
             docnr: this.refs.docnr.value,
             date: this.refs.date.value,
-        }
+        };
 
         this.props.updateMeta(meta);
     },
