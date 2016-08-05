@@ -4,14 +4,15 @@
  */
 
 import React from 'react';
+import h from './../helpers';
 
 var ClientForm = React.createClass({
     getClient: function () {
         return {
-            name: this.refs.name.value,
-            address: this.refs.address.value,
-            zipCode: this.refs.zipCode.value,
-            city: this.refs.city.value,
+            name: this.refs.name.value || null,
+            address: this.refs.address.value || null,
+            zipCode: this.refs.zipCode.value || null,
+            city: this.refs.city.value || null,
         }
     },
     updateClient: function (event) {
@@ -23,7 +24,11 @@ var ClientForm = React.createClass({
     saveClient: function (event) {
         event.preventDefault();
         let client = this.getClient();
-        localStorage.setItem('invoice-client', JSON.stringify(client));
+        for(let prop in Object.values(client)) {
+            if (Object.values(client)[prop] !== null) {
+                localStorage.setItem('invoice-client', JSON.stringify(client));
+            }
+        }
     },
     loadClient: function (event) {
         event.preventDefault();
@@ -47,8 +52,8 @@ var ClientForm = React.createClass({
                 <input type="text" ref="zipCode" placeholder="Zip-code" />
                 <input type="text" ref="city" placeholder="City" />
                 <button type="submit">Update</button>
-                <button type="button" onClick={this.saveClient}>Save</button>
-                <button type="button" onClick={this.loadClient}>Get latest</button>
+                <button type="button" disabled={!h.localStorageSupport} onClick={this.saveClient}>Save</button>
+                <button type="button" disabled={!h.localStorageSupport} onClick={this.loadClient}>Get latest</button>
             </form>
         )
     }

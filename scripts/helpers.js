@@ -21,6 +21,16 @@ let helpers = {
             mm='0'+mm
         }
         return yyyy+'-'+mm+'-'+dd;
+    },
+    localStorageSupport: function () {
+        const localStorageTest = 'test';
+        try {
+            localStorage.setItem(test, localStorageTest);
+            localStorage.removeItem(test);
+            return true;
+        } catch(e) {
+            return false;
+        }
     }
 };
 

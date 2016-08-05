@@ -26,9 +26,18 @@ button
   transition: all 0.2s
   width: 100%
 
-button:hover, button:focus
+button[disabled]
+  opacity: .5
+  &:hover
+    background: #7c8f9e
+    color: white
+
+button:hover, button[type=submit]:focus
   background: white
   color: #7c8f9e
+  outline: none
+
+button[type=button]:focus
   outline: none
 
 .print
