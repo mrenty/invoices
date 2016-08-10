@@ -1,29 +1,59 @@
 .document
-  background: white
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
   color: dark-blue
-  margin: 0 auto
   padding-bottom: 175px
-  position: relative
-  width: 960px
 
 .invoice__header
   background-color: gray
   color: dark-blue
-  padding: 60px 60px 0
+  padding: 60px 60px 8px
 
 .invoice__logo
   margin-bottom: 50px
 
+.invoice__contact-info
+  background-image: url('images/arrows.svg')
+  background-position: center top
+  background-repeat: no-repeat
+  background-size: 90px
+  overflow: hidden
+  width: 100%
+  
+.invoice__sender
+  float: left
+  width: 50%
+
+.invoice__client
+  float: right
+  text-align: right
+  width: 50%
+
 .invoice__name
-  font-size: 16px
+  font-size: 18px
   font-weight: normal
   margin: 0
-  text-align: left
+  text-align: inherit
 
 .invoice__header p
   font-size: 14px
+  line-height: 20px
   margin: 0
+
+.invoice__meta
+  background: gray
+  overflow: hidden
+  padding: 42px 0 0 60px
+
+.invoice__meta__data
+  float: left
+
+.invoice__docnr
+  display: block
+  font-size: 18px
+
+.invoice__date
+  display: block
+  font-size: 14px
+  line-height: 20px
 
 .invoice__total
   background-color: dark-blue
@@ -137,11 +167,11 @@
 
 .invoice__footer
   bottom: 0
-  height: 175px;
+  height: 175px
   padding: 0 60px
   position: absolute
   width: 100%
-  
+
 .invoice__calculation
   background-color: gray
   overflow: hidden
@@ -173,10 +203,10 @@
   margin: 0
   padding: 14px 0
 
-@media print
-  .document
-    width: 100vw
+.invoice__disclaimer span
+  font-weight: bold
 
+@media print
   .invoice__table
     width: 100vw
 

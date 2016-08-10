@@ -1,18 +1,39 @@
 @require './normalize.styl'
 @require './_*.styl'
 
+body
+  background #f6f6f6
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  font-family 'Open Sans', sans-serif
+  font-size 2rem
+
 .sidebar
-  background: #2f3238
-  color: #b5b5b5
-  display: block
+  background: #020204
+  background: linear-gradient(#020204, #5b7687)
+  color: white
+  display: flex
+  flex-direction: column
   float: left
   height: 100vh
   overflow-y scroll
   padding: 20px
+  position: relative
   width: 30%
 
+.react-tabs
+  flex: 0 0 auto
+
+.sidebar__actions
+  display: flex
+  flex: 1 0 auto
+  flex-direction: column
+  justify-content: flex-end
+  margin-top: 40px
+  overflow: hidden
+
 .task-form
-  margin: 0 auto;
+  margin: 0 auto
 
 .preview
   display: block
@@ -22,13 +43,26 @@
   padding: 20px
   width: 70%
 
+.document
+  background: white
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+  margin: 0 auto
+  min-height: 1329px
+  position: relative
+  width: 960px
+ 
 @media print
   .sidebar
     display: none
 
   .preview
     padding: 0
+    height: auto
+    min-height: 100vh
+    overflow-y: visible
     width: 100%
 
   .document
-    min-height: 100%
+    box-shadow: none
+    min-height: 100vh
+    width: 100vw

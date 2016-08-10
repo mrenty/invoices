@@ -1,0 +1,33 @@
+.react-tabs [role=tablist]
+  background: none
+  border: 0
+  display: flex
+  flex-directiom: column
+  margin-bottom: 40px
+
+.react-tabs [role=tab]
+  background: transparent
+  border: 0
+  border-bottom: 2px solid pink
+  border-radius: 0
+  flex: 1 1 auto
+  padding: 10px 0
+  text-align: center
+  transition: all .3s linear
+
+.react-tabs [role=tab]:hover,
+.react-tabs [role=tab]:focus
+  box-shadow: none
+  color: white
+  outline: none
+
+.react-tabs [role=tab]:hover::after,
+.react-tabs [role=tab]:focus::after
+  display: none
+
+.react-tabs [role=tab][aria-selected=true]
+  background: pink
+  border: 0
+  border-bottom: 2px solid pink
+  border-radius: 0
+  color: white
