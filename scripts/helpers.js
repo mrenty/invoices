@@ -1,6 +1,7 @@
 let helpers = {
     formatPrice: function (rate) {
-        return rate.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2});
+        const rateInCents = rate/100;
+        return rateInCents.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2});
     },
     formatDate: function (date) {
         var formattedDate = new Date(date).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' });

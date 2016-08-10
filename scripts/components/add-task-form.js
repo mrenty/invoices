@@ -8,13 +8,16 @@ import React from 'react';
 var AddTaskForm = React.createClass({
     createTask: function (event) {
         event.preventDefault();
-        let task = {
+        const rate = parseFloat(this.refs.rate.value.replace(/,/g, '.')) * 100 || 0;
+        const vat = rate * 0.21;
+        const hours = parseFloat(this.refs.hours.value) || 1;
+        const task = {
             name: this.refs.name.value || '',
             desc: this.refs.desc.value || '',
-            rate: parseFloat(this.refs.rate.value.replace(/,/g, '.')) || 0,
+            rate: rate,
             hours: this.refs.hours.value,
-            totalExcl: ((parseFloat(this.refs.hours.value) || 1) * (parseFloat(this.refs.rate.value.replace(/,/g, '.')) || 0)),
-            vat: (parseInt(this.refs.hours.value) * parseFloat(this.refs.rate.value.replace(/,/g, '.') || 0) * 0.21)
+            totalExcl: hours * rate,
+            vat: hours * vat
         };
 
         this.props.addTask(task);
