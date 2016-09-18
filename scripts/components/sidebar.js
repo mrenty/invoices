@@ -10,6 +10,11 @@ import MetaForm from './meta-form';
 import ClientForm from './client-form';
 
 var Sidebar = React.createClass({
+    saveToDrive: function () {
+        const gadget = new cloudprint.Gadget();
+        gadget.setPrintDocument("url", this.props.meta.docnr, location);
+        gadget.openPrintDialog();
+    },
     render: function () {
         return (
             <div className="sidebar">
@@ -35,6 +40,7 @@ var Sidebar = React.createClass({
                 </Tabs>
                 <div className="sidebar__actions">
                     <button className="print" onClick={window.print}>Print</button>
+                    <button className="print" onClick={this.saveToDrive}>Save to Drive</button>
                 </div>
             </div>
         )
