@@ -30,7 +30,12 @@ var ClientForm = React.createClass({
         event.preventDefault();
         let client = this.getClient();
 
-        this.props.updateClient(client);
+        for(let prop in Object.values(client)) {
+            if (Object.values(client)[prop] !== null) {
+                this.props.updateClient(client);
+                return;
+            }
+        }
     },
     saveClient: function (event) {
         event.preventDefault();
@@ -40,6 +45,8 @@ var ClientForm = React.createClass({
                 localStorage.setItem('invoice-client', JSON.stringify(client));
                 this.setMessage('Saved!');
                 return;
+            } else {
+                this.setMessage('No data found');
             }
         }
     },
@@ -57,7 +64,7 @@ var ClientForm = React.createClass({
             this.props.updateClient(client);
             this.setMessage('Loaded');
         } else {
-            this.setMessage('No data found', 'error');
+            this.setMessage('No data found');
         }
     },
     setMessage: function (message, type) {
