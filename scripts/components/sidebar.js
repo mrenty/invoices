@@ -12,7 +12,13 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 var Sidebar = React.createClass({
+    saveToComputer: function () {
+        this.save('save');
+    },
     saveToDrive: function () {
+        this.save('gcp');
+    },
+    save: function (method) {
 
         if (!navigator.onLine) {
             console.warn('No active internet connection!');
@@ -67,10 +73,17 @@ var Sidebar = React.createClass({
             // https://github.com/MrRio/jsPDF/issues/702
             var img = canvas.toDataURL('image/jpeg');
             pdf.addImage(img, 'JPEG', 0, 0, pdf.internal.pageSize.width, pdf.internal.pageSize.height);
-            let rawData = pdf.output('datauristring').split(',')[1];
 
-            gadget.setPrintDocument('application/pdf', name, rawData, 'base64');
-            gadget.openPrintDialog();
+            switch(method) {
+                case 'gcp':
+                    let rawData = pdf.output('datauristring').split(',')[1];
+                    gadget.setPrintDocument('application/pdf', name, rawData, 'base64');
+                    gadget.openPrintDialog();
+                    break;
+                default:
+                    pdf.save(name + '.pdf');
+            }
+
         });
 
         element.style.position = 'relative';
@@ -102,8 +115,8 @@ render: function () {
                     </TabPanel>
                 </Tabs>
                 <div className="sidebar__actions">
-                    <button className="print" onClick={window.print}>Print</button>
-                    <button className="print" onClick={this.saveToDrive}>Save to Drive</button>
+                    <button className="print" onClick={this.saveToComputer}>Save</button>
+                    <button className="print" onClick={this.saveToDrive}>Sync to Drive</button>
                 </div>
             </div>
         )
