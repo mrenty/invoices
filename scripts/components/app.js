@@ -10,9 +10,10 @@ import Header from './header';
 
 import h from './../helpers';
 
-var App = React.createClass({
-    getInitialState: function () {
-        return {
+class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
             tasks: {},
             meta: {
                 docnr: '#01-001',
@@ -24,30 +25,36 @@ var App = React.createClass({
                 zipCode: '1234',
                 city: 'Anytown'
             }
-        }
-    },
-    addTask: function (task) {
+        };
+        this.addTask = this.addTask.bind(this);
+        this.removeTask = this.removeTask.bind(this);
+        this.renderTask = this.renderTask.bind(this);
+        this.updateMeta = this.updateMeta.bind(this);
+        this.updateClient = this.updateClient.bind(this);
+        this.renderTotal = this.renderTotal.bind(this);
+    }
+    addTask(task) {
         let timestamp = (new Date()).getTime();
         this.state.tasks['task-' + timestamp] = task;
         this.setState({tasks: this.state.tasks});
-    },
-    removeTask: function (key) {
+    }
+    removeTask(key) {
         delete this.state.tasks[key];
         this.setState({
             tasks : this.state.tasks
         });
-    },
-    renderTask: function (key) {
+    }
+    renderTask(key) {
         return <Task key={key} index={key} details={this.state.tasks[key]}
                      removeTask={this.removeTask.bind(this, key)}/>
-    },
-    updateMeta: function (meta) {
+    }
+    updateMeta(meta) {
         this.setState({meta: meta});
-    },
-    updateClient: function (client) {
+    }
+    updateClient(client) {
         this.setState({client: client});
-    },
-    renderTotal:function () {
+    }
+    renderTotal() {
         let taskIds = Object.keys(this.state.tasks);
 
         return taskIds.reduce((prevTotal, key)=> {
@@ -60,8 +67,8 @@ var App = React.createClass({
 
             return prevTotal;
         }, 0);
-    },
-    render: function () {
+    }
+    render() {
         let companyInfo = require('./../company-info');
         return (
             <div>
@@ -115,6 +122,6 @@ var App = React.createClass({
             </div>
         )
     }
-});
+}
 
 export default App;

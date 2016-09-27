@@ -5,8 +5,12 @@
 
 import React from 'react';
 
-var AddTaskForm = React.createClass({
-    createTask: function (event) {
+class AddTaskForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.createTask = this.createTask.bind(this);
+    }
+    createTask(event) {
         event.preventDefault();
         const rate = parseFloat(this.refs.rate.value.replace(/,/g, '.')) * 100 || 0;
         const vat = rate * 0.21;
@@ -23,8 +27,8 @@ var AddTaskForm = React.createClass({
         this.props.addTask(task);
         this.refs.taskForm.reset();
         this.refs.taskForm.elements[0].focus();
-    },
-    render: function () {
+    }
+    render() {
         return (
             <form className="task-form" ref="taskForm" onSubmit={this.createTask}>
                 <input type="text" ref="name" placeholder="Name" />
@@ -35,6 +39,6 @@ var AddTaskForm = React.createClass({
             </form>
         )
     }
-});
+}
 
 export default AddTaskForm;

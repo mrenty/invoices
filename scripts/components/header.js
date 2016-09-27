@@ -5,8 +5,11 @@
 
 import React from 'react';
 
-var Header = React.createClass({
-    render: function () {
+class Header extends React.Component{
+    constructor(props) {
+        super(props);
+    }
+    render() {
         const company = this.props.company;
         const client = this.props.client;
         return (
@@ -33,6 +36,6 @@ var Header = React.createClass({
             </header>
         )
     }
-});
+}
 
 export default Header;

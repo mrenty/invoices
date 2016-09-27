@@ -5,8 +5,12 @@
 
 import React from 'react';
 
-var MetaForm = React.createClass({
-    updateMeta: function (event) {
+class MetaForm extends React.Component{
+    constructor(props) {
+        super(props);
+        this.updateMeta = this.updateMeta.bind(this);
+    }
+    updateMeta(event) {
         event.preventDefault();
         let meta = {
             docnr: this.refs.docnr.value,
@@ -14,8 +18,8 @@ var MetaForm = React.createClass({
         };
 
         this.props.updateMeta(meta);
-    },
-    render: function () {
+    }
+    render() {
         const meta = this.props.meta;
         return (
             <form className="meta-form" ref="metaForm" onSubmit={this.updateMeta}>
@@ -25,6 +29,6 @@ var MetaForm = React.createClass({
             </form>
         )
     }
-});
+}
 
 export default MetaForm;

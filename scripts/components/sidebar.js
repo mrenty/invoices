@@ -11,14 +11,20 @@ import ClientForm from './client-form';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-var Sidebar = React.createClass({
-    saveToComputer: function () {
+class Sidebar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.save = this.save.bind(this);
+        this.saveToComputer = this.saveToComputer.bind(this);
+        this.syncToDrive = this.syncToDrive.bind(this);
+    }
+    saveToComputer() {
         this.save('save');
-    },
-    saveToDrive: function () {
+    }
+    syncToDrive(){
         this.save('gcp');
-    },
-    save: function (method) {
+    }
+    save(method) {
 
         if (!navigator.onLine) {
             console.warn('No active internet connection!');
@@ -90,8 +96,8 @@ var Sidebar = React.createClass({
         element.style.width = cache_width;
 
         document.body.classList.remove('print-preview');
-    },
-render: function () {
+    }
+    render() {
         return (
             <div className="sidebar">
                 <Tabs>
@@ -116,11 +122,11 @@ render: function () {
                 </Tabs>
                 <div className="sidebar__actions">
                     <button className="print" onClick={this.saveToComputer}>Save</button>
-                    <button className="print" onClick={this.saveToDrive}>Sync to Drive</button>
+                    <button className="print" onClick={this.syncToDrive}>Sync to Drive</button>
                 </div>
             </div>
         )
     }
-});
+}
 
 export default Sidebar;

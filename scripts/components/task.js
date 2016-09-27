@@ -6,8 +6,11 @@
 import React from 'react';
 import h from './../helpers';
 
-var Task = React.createClass({
-    render: function () {
+class Task extends React.Component{
+    constructor(props) {
+        super(props);
+    }
+    render() {
         let details = this.props.details;
         return (
             <tr>
@@ -22,6 +25,6 @@ var Task = React.createClass({
             </tr>
         )
     }
-});
+}
 
 export default Task;

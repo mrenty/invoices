@@ -7,26 +7,25 @@ import React from 'react';
 import Expire from './expire';
 import h from './../helpers';
 
-var ClientForm = React.createClass({
-    getDefaultProps: function () {
-        return {
-            delay: 1000
-        };
-    },
-    getInitialState: function () {
-        return {
-            message: {},
-        };
-    },
-    getClient: function () {
+class ClientForm extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = { message: {} };
+        this.getClient = this.getClient.bind(this);
+        this.updateClient = this.updateClient.bind(this);
+        this.saveClient = this.saveClient.bind(this);
+        this.loadClient = this.loadClient.bind(this);
+        this.setMessage = this.setMessage.bind(this);
+    }
+    getClient() {
         return {
             name: this.refs.name.value || null,
             address: this.refs.address.value || null,
             zipCode: this.refs.zipCode.value || null,
             city: this.refs.city.value || null,
         }
-    },
-    updateClient: function (event) {
+    }
+    updateClient(event) {
         event.preventDefault();
         let client = this.getClient();
 
@@ -36,8 +35,8 @@ var ClientForm = React.createClass({
                 return;
             }
         }
-    },
-    saveClient: function (event) {
+    }
+    saveClient(event) {
         event.preventDefault();
         let client = this.getClient();
         for(let prop in Object.values(client)) {
@@ -49,8 +48,8 @@ var ClientForm = React.createClass({
                 this.setMessage('No data found');
             }
         }
-    },
-    loadClient: function (event) {
+    }
+    loadClient(event) {
         event.preventDefault();
 
         if (localStorage.getItem('invoice-client') !== null) {
@@ -66,16 +65,16 @@ var ClientForm = React.createClass({
         } else {
             this.setMessage('No data found');
         }
-    },
-    setMessage: function (message, type) {
+    }
+    setMessage(message, type) {
         this.setState({message: {type: type || 'info', text: message}});
         setTimeout(
             () => {
                 this.setState({message: {}});
             }, this.props.delay
         );
-    },
-    render: function () {
+    }
+    render() {
         const isLocalStorageSupported = !h.localStorageSupport;
         return (
             <div>
@@ -94,6 +93,18 @@ var ClientForm = React.createClass({
             </div>
         )
     }
-});
+}
+
+ClientForm.propTypes = {
+
+    delay: React.PropTypes.number
+
+};
+
+ClientForm.defaultProps = {
+
+    delay: 1000
+
+};
 
 export default ClientForm;
