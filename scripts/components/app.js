@@ -3,10 +3,9 @@
  */
 
 import React from 'react';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
 import Sidebar from './sidebar';
 import Task from './task';
-import Header from './header';
+import Invoice from '../invoice.jsx';
 
 import h from './../helpers';
 
@@ -69,56 +68,14 @@ class App extends React.Component{
         }, 0);
     }
     render() {
-        let companyInfo = require('./../company-info');
+        const prices = {
+            total: (this.renderTotal() * 0.21) + this.renderTotal(),
+            vat: (this.renderTotal() * 0.21)
+        };
         return (
             <div>
                 <Sidebar addTask={this.addTask} updateMeta={this.updateMeta} meta={this.state.meta} updateClient={this.updateClient} />
-                <div className="preview">
-                    <div className="document">
-                        <Header company={companyInfo} client={this.state.client} />
-                        <div className="invoice__meta">
-                            <div className="invoice__meta__data">
-                                <span className="invoice__docnr">{this.state.meta.docnr}</span>
-                                <time dateTime={this.state.meta.date} className="invoice__date">{h.formatDate(this.state.meta.date)}</time>
-                            </div>
-                            <div className="invoice__total invoice__total--large">
-                                <span className="invoice__total__label">Total</span>
-                                <strong>{h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}</strong>
-                            </div>
-                        </div>
-                        <table className="invoice__table">
-                            <thead>
-                            <tr>
-                                <th>Task description</th>
-                                <th>Rate</th>
-                                <th>Hours</th>
-                                <th>Line total</th>
-                            </tr>
-                            </thead>
-                            <CSSTransitionGroup component="tbody" transitionName="task" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
-                                {Object.keys(this.state.tasks).map(this.renderTask)}
-                            </CSSTransitionGroup>
-                        </table>
-                        <footer className="invoice__footer">
-                            <div className="invoice__calculation">
-                                <div className="invoice__calculation__item">
-                                    <span className="invoice__calculation__label">Subtotal</span>
-                                    <b>{h.formatPrice(this.renderTotal())}</b>
-                                </div>
-                                <div className="invoice__calculation__addition"></div>
-                                <div className="invoice__calculation__item">
-                                    <span className="invoice__calculation__label">VAT</span>
-                                    <b>{h.formatPrice(this.renderTotal() * 0.21)}</b>
-                                </div>
-                                <div className="invoice__total">
-                                    <span className="invoice__total__label">Total</span>
-                                    <strong>{h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal())}</strong>
-                                </div>
-                            </div>
-                            <p className="invoice__disclaimer">Please transfer the amount within 30 days <span>IBAN {companyInfo.basic.bankAccountNumber}</span>.</p>
-                        </footer>
-                    </div>
-                </div>
+                <Invoice client={this.state.client} meta={this.state.meta} prices={prices} tasks={this.state.tasks} />
             </div>
         )
     }
