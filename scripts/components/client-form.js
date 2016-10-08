@@ -4,18 +4,16 @@
  */
 
 import React from 'react';
-import Expire from './expire';
 import h from './../helpers';
 
 class ClientForm extends React.Component{
     constructor(props) {
         super(props);
-        this.state = { message: {} };
         this.getClient = this.getClient.bind(this);
         this.updateClient = this.updateClient.bind(this);
         this.saveClient = this.saveClient.bind(this);
         this.loadClient = this.loadClient.bind(this);
-        this.setMessage = this.setMessage.bind(this);
+        this.setNotification = this.setNotification.bind(this);
     }
     getClient() {
         return {
@@ -42,10 +40,10 @@ class ClientForm extends React.Component{
         for(let prop in Object.values(client)) {
             if (Object.values(client)[prop] !== null) {
                 localStorage.setItem('invoice-client', JSON.stringify(client));
-                this.setMessage('Saved!');
+                this.setNotification('Saved client info!');
                 return;
             } else {
-                this.setMessage('No data found');
+                this.setNotification('No data found');
             }
         }
     }
@@ -61,18 +59,25 @@ class ClientForm extends React.Component{
             this.refs.city.value = client.city;
 
             this.props.updateClient(client);
-            this.setMessage('Loaded');
+            this.setNotification('Loaded client info');
         } else {
-            this.setMessage('No data found');
+            this.setNotification('No data found');
         }
     }
-    setMessage(message, type) {
-        this.setState({message: {type: type || 'info', text: message}});
-        setTimeout(
-            () => {
-                this.setState({message: {}});
-            }, this.props.delay
-        );
+    setNotification(message) {
+        if (!('Notification' in window)) {
+            return;
+        }
+
+        Notification.requestPermission().then(function() {
+            const options = {
+                body: message,
+                icon: '/assets/badge.png'
+            };
+
+            let n = new Notification('Invoices', options);
+            setTimeout(n.close.bind(n), 4000);
+        });
     }
     render() {
         const isLocalStorageSupported = !h.localStorageSupport;
@@ -87,24 +92,9 @@ class ClientForm extends React.Component{
                     <button type="button" disabled={isLocalStorageSupported} onClick={this.saveClient}>Save</button>
                     <button type="button" disabled={isLocalStorageSupported} onClick={this.loadClient}>Load</button>
                 </form>
-                <Expire delay={this.props.delay} type={this.state.message.type}>
-                    {this.state.message.text}
-                </Expire>
             </div>
         )
     }
 }
-
-ClientForm.propTypes = {
-
-    delay: React.PropTypes.number
-
-};
-
-ClientForm.defaultProps = {
-
-    delay: 1000
-
-};
 
 export default ClientForm;
