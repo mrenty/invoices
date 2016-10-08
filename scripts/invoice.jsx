@@ -1,8 +1,6 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
-import h from './helpers';
-
 class Invoice extends React.Component{
     constructor(props) {
         super(props);
@@ -39,11 +37,11 @@ class Invoice extends React.Component{
                     <div className="invoice__meta">
                         <div className="invoice__meta__data">
                             <span className="invoice__docnr">{meta.docnr}</span>
-                            <time dateTime={meta.date} className="invoice__date">{h.formatDate(meta.date)}</time>
+                            <time dateTime={meta.date} className="invoice__date">{meta.formattedDate}</time>
                         </div>
                         <div className="invoice__total invoice__total--large">
                             <span className="invoice__total__label">Total</span>
-                            <strong>{h.formatPrice(prices.total + prices.vat)}</strong>
+                            <strong>{prices.totalIncl}</strong>
                         </div>
                     </div>
                     <table className="invoice__table">
@@ -63,16 +61,16 @@ class Invoice extends React.Component{
                         <div className="invoice__calculation">
                             <div className="invoice__calculation__item">
                                 <span className="invoice__calculation__label">Subtotal</span>
-                                <b>{h.formatPrice(prices.total)}</b>
+                                <b>{prices.totalExcl}</b>
                             </div>
                             <div className="invoice__calculation__addition"></div>
                             <div className="invoice__calculation__item">
                                 <span className="invoice__calculation__label">VAT</span>
-                                <b>{h.formatPrice(prices.vat)}</b>
+                                <b>{prices.vat}</b>
                             </div>
                             <div className="invoice__total">
                                 <span className="invoice__total__label">Total</span>
-                                <strong>{h.formatPrice(prices.total + prices.vat)}</strong>
+                                <strong>{prices.totalIncl}</strong>
                             </div>
                         </div>
                         <p className="invoice__disclaimer">Please transfer the amount within 30 days <span>IBAN {company.basic.bankAccountNumber}</span>.</p>

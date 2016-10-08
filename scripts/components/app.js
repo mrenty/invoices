@@ -69,14 +69,20 @@ class App extends React.Component{
     }
     render() {
         const prices = {
-            total: (this.renderTotal() * 0.21) + this.renderTotal(),
-            vat: (this.renderTotal() * 0.21)
+            totalExcl: h.formatPrice(this.renderTotal()),
+            totalIncl: h.formatPrice((this.renderTotal() * 0.21) + this.renderTotal()),
+            vat: h.formatPrice((this.renderTotal() * 0.21))
+        };
+        const meta = {
+            docnr: this.state.meta.docnr,
+            date: this.state.meta.date,
+            formattedDate: h.formatDate(this.state.meta.date)
         };
         const company = require('./../company-info');
         return (
             <div>
                 <Sidebar addTask={this.addTask} updateMeta={this.updateMeta} meta={this.state.meta} updateClient={this.updateClient} />
-                <Invoice removeTask={this.removeTask} renderTask={this.renderTask} company={company} client={this.state.client} meta={this.state.meta} prices={prices} tasks={this.state.tasks} />
+                <Invoice removeTask={this.removeTask} renderTask={this.renderTask} company={company} client={this.state.client} meta={meta} prices={prices} tasks={this.state.tasks} />
             </div>
         )
     }
