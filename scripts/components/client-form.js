@@ -69,6 +69,8 @@ class ClientForm extends React.Component{
             return;
         }
 
+        const delay = this.props.delay;
+
         Notification.requestPermission().then(function() {
             const options = {
                 body: message,
@@ -76,7 +78,11 @@ class ClientForm extends React.Component{
             };
 
             let n = new Notification('Invoices', options);
-            setTimeout(n.close.bind(n), 4000);
+            setTimeout(
+                () => {
+                    n.close.bind(n);
+                }, delay
+            );
         });
     }
     render() {
@@ -96,5 +102,17 @@ class ClientForm extends React.Component{
         )
     }
 }
+
+ClientForm.propTypes = {
+
+    delay: React.PropTypes.number
+
+};
+
+ClientForm.defaultProps = {
+
+    delay: 4000
+
+};
 
 export default ClientForm;
