@@ -1,9 +1,12 @@
 # Invoices
 
+Create your own custom invoice and export it as PDF or sync it to Google Drive.
+![Screenshot of the app](https://d17oy1vhnax1f7.cloudfront.net/items/1U3G3U190M3Q47341B25/Invoices-electron.png?v=bec1c34c)
+
 ## To install:
 
 1. Download and install Node.js, which will also install npm.
-2. run `npm install` 
+2. run `npm install`
 
 ## To run:
 
