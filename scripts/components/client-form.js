@@ -29,24 +29,23 @@ class ClientForm extends React.Component{
         event.preventDefault();
         let client = this.getClient();
 
-        for(let prop in Object.values(client)) {
-            if (Object.values(client)[prop] !== null) {
-                this.props.updateClient(client);
-                return;
-            }
+        const notEmpty = Object.keys(client).every(function(k){ return client.hasOwnProperty(k) });
+        if (notEmpty) {
+            this.props.updateClient(client);
+            return;
         }
     }
     saveClient(event) {
         event.preventDefault();
         let client = this.getClient();
-        for(let prop in Object.values(client)) {
-            if (Object.values(client)[prop] !== null) {
-                localStorage.setItem('invoice-client', JSON.stringify(client));
-                this.setMessage('Saved!');
-                return;
-            } else {
-                this.setMessage('No data found');
-            }
+
+        const notEmpty = Object.keys(client).every(function(k){ return client.hasOwnProperty(k) });
+        if (notEmpty) {
+            localStorage.setItem('invoice-client', JSON.stringify(client));
+            this.setMessage('Saved!');
+            return;
+        } else {
+            this.setMessage('No data found');
         }
     }
     loadClient(event) {
