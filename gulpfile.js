@@ -14,23 +14,23 @@ var buffer = require('vinyl-buffer');
 
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
-var historyApiFallback = require('connect-history-api-fallback')
+var historyApiFallback = require('connect-history-api-fallback');
 
 gulp.task('styles',function() {
 
   gulp.src('css/fonts/**.*')
-      .pipe(gulp.dest('build/css/fonts'))
+      .pipe(gulp.dest('build/css/fonts'));
   // Compiles CSS
   gulp.src('css/style.styl')
       .pipe(stylus())
       .pipe(autoprefixer())
       .pipe(gulp.dest('./build/css/'))
-      .pipe(reload({stream:true}))
+      .pipe(reload({stream:true}));
 });
 
 gulp.task('images',function(){
   gulp.src('css/images/**')
-      .pipe(gulp.dest('./build/css/images'))
+      .pipe(gulp.dest('./build/css/images'));
 });
 
 gulp.task('browser-sync', function() {
