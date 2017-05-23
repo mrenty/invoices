@@ -1,5 +1,7 @@
 # Invoices
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6c5a48e61e214c89bcb7b993df803db6)](https://www.codacy.com/app/m.renty/invoices?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mrenty/invoices&amp;utm_campaign=Badge_Grade)
+
 Create your own custom invoice and export it as PDF or sync it to Google Drive.
 ![Screenshot of the app](https://d17oy1vhnax1f7.cloudfront.net/items/1U3G3U190M3Q47341B25/Invoices-electron.png?v=bec1c34c)
 
